@@ -1,4 +1,3 @@
-# Playwright в этом репозитории
 
 По умолчанию `make` ставит:
 
@@ -20,20 +19,3 @@
 - для нестандартных multi-step сценариев;
 - для ad hoc проверок, где агенту проще написать свой JS-скрипт;
 - для сценариев, где полезен видимый браузер по умолчанию.
-
-## Как поставить `playwright-skill` вручную
-
-```bash
-claude plugins marketplace add lackeyjb/playwright-skill
-claude plugins install playwright-skill@playwright-skill
-cd ~/.claude/plugins/marketplaces/playwright-skill/skills/playwright-skill
-npm run setup
-```
-
-После установки можно проверить:
-
-```bash
-claude plugins list
-```
-
-Если plugin не нужен, ничего дополнительно ставить не надо: для большинства задач уже достаточно `playwright-cli`.
