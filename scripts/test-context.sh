@@ -17,7 +17,7 @@ EXPECTED_SKILLS="${EXPECTED_SKILLS:-adr-writing docmost find-skills fpf-simple g
 
 EXPECTED_MCP="${EXPECTED_MCP:-plugin:playwright:playwright chrome-devtools tavily context7}"
 
-EXPECTED_PLUGINS="${EXPECTED_PLUGINS:-claude-md-management@claude-plugins-official code-review@claude-plugins-official code-simplifier@claude-plugins-official commit-commands@claude-plugins-official doc-validate@dapi feature-dev@claude-plugins-official frontend-design@claude-plugins-official github-workflow@dapi himalaya@dapi media-upload@dapi playwright-skill@playwright-skill playwright@claude-plugins-official pr-review-fix-loop@dapi pr-review-toolkit@claude-plugins-official ralph-loop@claude-plugins-official superpowers@claude-plugins-official zellij-workflow@dapi}"
+EXPECTED_PLUGINS="${EXPECTED_PLUGINS:-claude-md-management@claude-plugins-official code-review@claude-plugins-official code-simplifier@claude-plugins-official commit-commands@claude-plugins-official doc-validate@dapi feature-dev@claude-plugins-official frontend-design@claude-plugins-official github-workflow@dapi media-upload@dapi playwright-skill@playwright-skill playwright@claude-plugins-official pr-review-toolkit@claude-plugins-official ralph-loop@claude-plugins-official superpowers@claude-plugins-official}"
 
 EXPECTED_MARKETPLACES="${EXPECTED_MARKETPLACES:-claude-plugins-official dapi playwright-skill}"
 

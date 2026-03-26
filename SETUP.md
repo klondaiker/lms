@@ -18,8 +18,7 @@ make
 2. устанавливает инструменты из `mise.toml`;
 3. ставит CLI-агенты;
 4. ставит CLI-утилиты для агентов;
-5. ставит curated skills для `codex` и `claude-code`;
-6. добавляет marketplace и plugins для `claude-code`.
+5. ставит curated skills для `codex` и `claude-code`.
 
 ## Авторизация
 
@@ -37,7 +36,19 @@ gh auth login
 direnv allow
 ```
 
-`tgcli`, `googleworkspace/cli` и `himalaya` — опциональные: `make check` покажет `WARN`, если они не настроены, но не завершится ошибкой.
+`tgcli`, `googleworkspace/cli`, `himalaya` и связанные Claude plugins/skills — опциональные. Базовый `make check` их не проверяет.
+
+Если нужны эти интеграции, установите их отдельно:
+
+```bash
+make extra
+```
+
+И проверьте отдельно:
+
+```bash
+make extra-check
+```
 
 ## Проверка установки
 
@@ -52,10 +63,15 @@ make check
 - обязательный toolchain из локального setup;
 - установку agent CLI;
 - обязательные проверки авторизации для `claude`, `codex` и `gh`;
-- установку вспомогательных CLI для агентов: `playwright-cli`;
-- опциональные проверки настройки `tgcli`, `googleworkspace/cli`, `himalaya`, curated skills и Claude plugins.
+- установку вспомогательных CLI для агентов: `playwright-cli`, `ccbox`;
+- базовый shell/env setup, включая `direnv` и числовой `PORT`.
 
-Команда завершается с ошибкой только на обязательных проверках. Для опциональных интеграций она оставляет `WARN`, чтобы было видно, что ещё не настроено, но базовая установка уже пригодна к работе.
+Команда завершается с ошибкой только на проблемах базовой установки.
+
+Дополнительные проверки вынесены отдельно:
+
+- `make extra-check` — опциональные интеграции и Claude plugins/skills;
+- `make check-context` — baseline-контекст Claude Code и Codex.
 
 ## Что устанавливается автоматически
 
@@ -79,7 +95,7 @@ make check
 | [port-selector](https://github.com/dapi/port-selector) | Автоматический выбор свободного порта из диапазона для локальных dev-серверов и e2e при параллельной работе агентов | Выполнить `port-selector` и убедиться, что команда возвращает номер свободного порта |
 | [ccbox](https://github.com/diskd-ai/ccbox) | Инспекция и анализ кодовой базы для агентов | Выполнить `ccbox --version` |
 
-Опциональные (ставятся через `make extra-skills`):
+Опциональные (ставятся через `make extra`, alias: `make extra-skills`):
 
 | Утилита | Для чего | Как проверить |
 | --- | --- | --- |
@@ -87,7 +103,7 @@ make check
 | [googleworkspace/cli](https://github.com/googleworkspace/cli) (`gws-docs`, `gws-docs-write`, `gws-drive`, `gws-sheets`) | Сбор требований и формирование проектной документации | Дать агенту ссылку на закрытый Google Doc и попросить прочитать его и дать выдержку |
 | [himalaya](https://github.com/pimalaya/himalaya) | Работа с почтой через IMAP/SMTP из CLI | Попросить агента прочитать письмо или найти письмо по теме после настройки почтового аккаунта |
 
-`make check` покажет `WARN` для этих утилит, если они не установлены или не настроены, но не завершится ошибкой.
+`make extra-check` покажет `WARN` для этих утилит, если они не установлены или не настроены, но не завершится ошибкой.
 
 Что не ставится автоматически, но желательно поставить:
 
@@ -105,11 +121,11 @@ make check
 
 `playwright-cli`, `prompt-engeneering`, `ccbox`, `ccbox-insights`.
 
-Через `make extra-skills` дополнительно: `tgcli`, `gws-docs`, `gws-docs-write`, `gws-drive`, `gws-sheets`.
+Через `make extra` дополнительно: `tgcli`, `gws-docs`, `gws-docs-write`, `gws-drive`, `gws-sheets`.
 
 ### Plugins для Claude Code
 
-Во время установки добавляются marketplace:
+Через `make extra` добавляются marketplace:
 
 - `dapi/claude-code-marketplace`
 
@@ -120,7 +136,7 @@ make check
 Если нужно ставить Claude plugins из вашего marketplace, это можно переопределить при запуске `make`, например:
 
 ```bash
-make agents-claude-plugins \
+make extra \
   CLAUDE_PLUGINS_MARKETPLACES=your-org/claude-code-marketplace \
   CLAUDE_MARKETPLACE_NAMES=your-org \
   CLAUDE_PLUGIN_NAMESPACE=your-org \
@@ -135,7 +151,7 @@ make agents-claude-plugins \
 - `googleworkspace/cli`: подключить Google Workspace
 - `himalaya`: настроить почтовый аккаунт и доступ к IMAP/SMTP
 
-После настройки аккаунтов повторно запустите `make check`, чтобы убедиться, что `WARN`-статусы для нужных вам интеграций ушли.
+После настройки аккаунтов повторно запустите `make extra-check`, чтобы убедиться, что `WARN`-статусы для нужных вам интеграций ушли.
 
 ## Что сохранить в производном проекте
 
