@@ -1,0 +1,6 @@
+<div class="mt-8">
+  <h1 class="text-3xl font-bold">Привет, <%= current_user.login %></h1>
+  <p class="mt-4">
+    <%= link_to "Выйти", session_path(id: "current"), data: { turbo_method: :delete } %>
+  </p>
+</div>

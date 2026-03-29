@@ -1,0 +1,23 @@
+<div class="mt-8 mx-auto w-full max-w-sm">
+  <h1 class="text-2xl font-bold mb-6">Войти</h1>
+
+  <% if flash[:alert] %>
+    <p class="text-red-600 mb-4"><%= flash[:alert] %></p>
+  <% end %>
+
+  <%= form_with url: sessions_path do |f| %>
+    <div class="mb-4">
+      <%= f.label :login, "Логин", class: "block mb-1" %>
+      <%= f.text_field :login, class: "border w-full px-3 py-2 rounded" %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :password, "Пароль", class: "block mb-1" %>
+      <%= f.password_field :password, class: "border w-full px-3 py-2 rounded" %>
+    </div>
+    <%= f.submit "Войти", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
+  <% end %>
+
+  <p class="mt-4 text-center">
+    Нет аккаунта? <%= link_to "Зарегистрироваться", new_user_path %>
+  </p>
+</div>
